@@ -1,5 +1,7 @@
 document.getElementById('download-form').addEventListener('submit', async function(event) {
     event.preventDefault();
+    
+    console.log('Form submitted!'); // Add this line to log the form submission
 
     const videoUrl = document.getElementById('video-url').value;
 

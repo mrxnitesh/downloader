@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Video Downloader</title>
+    <!-- Add any CSS stylesheets or external libraries here -->
+</head>
+<body>
+    <div class="container">
+        <h1>YouTube Video Downloader</h1>
+        <input type="text" id="videoUrl" placeholder="Paste YouTube URL here">
+        <button onclick="downloadVideo()">Download</button>
+    </div>
+
+    <!-- Add any JavaScript files or scripts here -->
+    <script>
+        function downloadVideo() {
+            const videoUrl = document.getElementById('videoUrl').value;
+
+            if (!videoUrl.trim()) {
+                alert('Please enter a YouTube URL');
+                return;
+            }
+
+            // Send a GET request to the backend server with the YouTube video URL
+            window.location.href = `/download?url=${encodeURIComponent(videoUrl)}`;
+        }
+    </script>
+</body>
+</html>

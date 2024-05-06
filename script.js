@@ -1,19 +1,39 @@
-document.getElementById('downloadForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    var url = document.getElementById('videoUrl').value;
-    fetch('https://downloader-backend-kej3mh2jr-mr-niteshs-projects.vercel.app/download', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ url: url })
-    })
-    .then(response => response.json())
-    .then(data => {
-        document.getElementById('message').textContent = data.message;
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        document.getElementById('message').textContent = 'An error occurred. Please try again later.';
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('downloadForm');
+    const message = document.getElementById('message');
+
+    form.addEventListener('submit', async function (event) {
+        event.preventDefault();
+        
+        const videoUrl = form.videoUrl.value.trim();
+
+        if (!videoUrl) {
+            showMessage('Please enter a valid YouTube video URL.', 'error');
+            return;
+        }
+
+        try {
+            const response = await fetch('/api/download', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ url: videoUrl })
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const data = await response.json();
+            showMessage(data.message, 'success');
+        } catch (error) {
+            showMessage('An error occurred. Please try again later.', 'error');
+        }
     });
+
+    function showMessage(msg, type) {
+        message.textContent = msg;
+        message.className = type;
+    }
 });

@@ -4,13 +4,11 @@
     "description": "A YouTube video downloader website",
     "main": "server.js",
     "scripts": {
-      "start": "node server.js"
+      "start": "node server.js",
+      "build": "echo 'No build step specified for frontend'"
     },
     "dependencies": {
-      "express": "^4.17.1",
-      "body-parser": "^1.19.0",
-      "cors": "^2.8.5",
-      "ytdl-core": "^4.3.2"
+      "express": "^4.17.1"
     },
     "devDependencies": {},
     "engines": {
